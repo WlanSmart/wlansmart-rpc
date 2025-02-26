@@ -15,6 +15,7 @@ type (
 		Password  string
 		ClientIP  string
 		ClientMAC string
+		Hostname  string
 	}
 
 	PortalBindResponse struct {
