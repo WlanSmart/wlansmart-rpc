@@ -2,6 +2,7 @@ package rpc
 
 import (
 	"crypto/tls"
+	"errors"
 	"net"
 	"net/http"
 	"time"
@@ -28,6 +29,8 @@ var (
 		},
 		Timeout: time.Second * 5,
 	}
+
+	ErrInternal = errors.New("server internal error")
 )
 
 func NewClient(endpont string, clientPrivateKey string, serverPublicKey string) (*rpcHttp.Client, error) {

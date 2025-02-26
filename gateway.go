@@ -9,7 +9,6 @@ import (
 
 var (
 	ErrModemNotFound = errors.New("modem not found")
-	ErrInternal      = errors.New("server internal error")
 )
 
 type Gateway struct {
