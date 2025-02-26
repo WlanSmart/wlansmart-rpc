@@ -10,6 +10,7 @@ type Portal struct {
 
 type (
 	PortalBindRequest struct {
+		Store     string
 		Username  string
 		Password  string
 		ClientIP  string
