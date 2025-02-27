@@ -34,3 +34,18 @@ func (p *Portal) Bind(req *PortalBindRequest) (resp *PortalBindResponse, err err
 	err = p.Client.Call("portal.Bind", req, &resp)
 	return
 }
+
+type (
+	PortalSendCodeRequet struct {
+		Phone string
+	}
+
+	PortalSendCodeResponse struct {
+		Code string
+	}
+)
+
+func (p *Portal) SendCode(req *PortalSendCodeRequet) (resp *PortalSendCodeResponse, err error) {
+	err = p.Client.Call("portal.SendCode", req, &resp)
+	return
+}
