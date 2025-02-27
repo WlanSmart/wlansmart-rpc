@@ -1,6 +1,8 @@
 package rpc
 
 import (
+	"time"
+
 	"github.com/abxuz/b-tools/brpc/http"
 )
 
@@ -11,6 +13,7 @@ type Portal struct {
 type (
 	PortalBindRequest struct {
 		Store     string
+		Mode      string
 		Username  string
 		Password  string
 		ClientIP  string
@@ -19,8 +22,11 @@ type (
 	}
 
 	PortalBindResponse struct {
-		Errno int
-		Msg   string
+		PlanName    string
+		ExpireTime  time.Time
+		WiredEnable bool
+		MaxClient   int
+		BindClient  int
 	}
 )
 
