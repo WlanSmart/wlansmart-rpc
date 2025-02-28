@@ -42,6 +42,7 @@ func (p *Portal) Bind(req *PortalBindRequest) (resp *PortalBindResponse, err err
 
 type (
 	PortalSendCodeRequet struct {
+		Store string
 		Phone string
 		Code  string
 	}
