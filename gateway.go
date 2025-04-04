@@ -23,19 +23,24 @@ type (
 	}
 
 	GatewayPullConfigResponse struct {
-		Radio1      RadioConfig
-		Radio2      RadioConfig
-		WiredEnable bool
-		WANEnable   bool
-		BridgeBit   byte
+		Radio       [8]Radio
+		Eth         [4]Eth
+		RouteEnable bool
 		Command     string
 	}
 
-	RadioConfig struct {
+	Radio struct {
 		SSID    string
 		Key     string
 		Channel string
 		Enable  bool
+		Hide    bool
+		Bridge  bool
+	}
+
+	Eth struct {
+		Enable bool
+		Bridge bool
 	}
 )
 
