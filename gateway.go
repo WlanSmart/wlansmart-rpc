@@ -23,10 +23,10 @@ type (
 	}
 
 	GatewayPullConfigResponse struct {
-		Radio       [8]Radio
-		Eth         [4]Eth
-		RouteEnable bool
-		Command     string
+		Radio   [8]Radio
+		Eth     [4]Eth
+		Route   Route
+		Command string
 	}
 
 	Radio struct {
@@ -35,12 +35,22 @@ type (
 		Channel string
 		Enable  bool
 		Hide    bool
-		Bridge  bool
+		Bridge  Bridge
 	}
 
 	Eth struct {
 		Enable bool
-		Bridge bool
+		Bridge Bridge
+	}
+
+	Route struct {
+		Enable bool
+		Vlan   int
+	}
+
+	Bridge struct {
+		Enable bool
+		Vlan   int
 	}
 )
 
