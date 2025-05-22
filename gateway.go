@@ -23,19 +23,37 @@ type (
 	}
 
 	GatewayPullConfigResponse struct {
-		Radio   [8]Radio
-		Eth     [4]Eth
-		Route   Route
-		Command string
+		SSID     SSIDConfig
+		Eth      EthConfig
+		Internet Internet
+		Command  string
 	}
 
-	Radio struct {
-		SSID    string
+	SSIDConfig struct {
+		SSID1 SSID
+		SSID2 SSID
+		SSID3 SSID
+		SSID4 SSID
+		SSID5 SSID
+		SSID6 SSID
+		SSID7 SSID
+		SSID8 SSID
+	}
+
+	SSID struct {
+		Name    string
 		Key     string
-		Channel string
 		Enable  bool
+		Channel string
 		Hide    bool
 		Bridge  Bridge
+	}
+
+	EthConfig struct {
+		Eth1 Eth
+		Eth2 Eth
+		Eth3 Eth
+		Eth4 Eth
 	}
 
 	Eth struct {
@@ -43,7 +61,7 @@ type (
 		Bridge Bridge
 	}
 
-	Route struct {
+	Internet struct {
 		Enable bool
 		Vlan   int
 	}
