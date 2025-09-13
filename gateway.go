@@ -23,19 +23,46 @@ type (
 	}
 
 	GatewayPullConfigResponse struct {
-		Radio1      RadioConfig
-		Radio2      RadioConfig
-		WiredEnable bool
-		WANEnable   bool
-		BridgeBit   byte
-		Command     string
+		SSID struct {
+			SSID1 SSID
+			SSID2 SSID
+			SSID3 SSID
+			SSID4 SSID
+			SSID5 SSID
+			SSID6 SSID
+			SSID7 SSID
+			SSID8 SSID
+		}
+		Eth struct {
+			Eth1 Eth
+			Eth2 Eth
+			Eth3 Eth
+			Eth4 Eth
+		}
+		Route struct {
+			Enable bool
+			Vlan   int
+		}
+		Command string
 	}
 
-	RadioConfig struct {
-		SSID    string
+	SSID struct {
+		Name    string
 		Key     string
-		Channel string
 		Enable  bool
+		Channel string
+		Hide    bool
+		Bridge  Bridge
+	}
+
+	Eth struct {
+		Enable bool
+		Bridge Bridge
+	}
+
+	Bridge struct {
+		Enable bool
+		Vlan   int
 	}
 )
 

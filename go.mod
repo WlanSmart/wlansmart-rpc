@@ -1,4 +1,4 @@
-module github.com/WlanSmart/wlansmart-rpc
+module github.com/WlanSmart/wlansmart-rpc/v2
 
 go 1.24
 
