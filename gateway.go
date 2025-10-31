@@ -7,6 +7,10 @@ import (
 	"golang.org/x/sync/singleflight"
 )
 
+const (
+	RpcNameGateway = "gateway"
+)
+
 var (
 	ErrModemNotFound = errors.New("modem not found")
 )
@@ -77,6 +81,6 @@ func (g *Gateway) PullConfigSingleflight(req *GatewayPullConfigRequest) (resp *G
 }
 
 func (g *Gateway) PullConfig(req *GatewayPullConfigRequest) (resp *GatewayPullConfigResponse, err error) {
-	err = g.Client.Call("gateway.PullConfig", req, &resp)
+	err = g.Client.Call(RpcNameGateway+".PullConfig", req, &resp)
 	return
 }

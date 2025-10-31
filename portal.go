@@ -6,6 +6,8 @@ import (
 	"github.com/abxuz/b-tools/brpc/http"
 )
 
+const RpcNamePortal = "portal"
+
 type Portal struct {
 	Client *http.Client
 }
@@ -36,7 +38,7 @@ type (
 )
 
 func (p *Portal) Bind(req *PortalBindRequest) (resp *PortalBindResponse, err error) {
-	err = p.Client.Call("portal.Bind", req, &resp)
+	err = p.Client.Call(RpcNamePortal+".Bind", req, &resp)
 	return
 }
 
@@ -53,6 +55,6 @@ type (
 )
 
 func (p *Portal) SendCode(req *PortalSendCodeRequet) (resp *PortalSendCodeResponse, err error) {
-	err = p.Client.Call("portal.SendCode", req, &resp)
+	err = p.Client.Call(RpcNamePortal+".SendCode", req, &resp)
 	return
 }
