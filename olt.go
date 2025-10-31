@@ -1,10 +1,25 @@
 package rpc
 
 import (
+	"context"
+	"time"
+
 	"github.com/abxuz/b-tools/brpc/http"
 )
 
-const RpcNameZxanOlt = "ZxanOlt"
+const (
+	RpcNameZxanOlt = "ZxanOlt"
+
+	TimeoutZxanOltListOnu               = time.Second * 30
+	TimeoutZxanOltListOnuDetail         = time.Minute
+	TimeoutZxanOltListOltOnuServicePort = time.Second * 15
+	TimeoutZxanOltSaveConf              = time.Second * 10
+
+	TimeoutHwOltListOnu               = time.Second * 30
+	TimeoutHwOltListOnuDetail         = time.Minute
+	TimeoutHwOltListOltOnuServicePort = time.Second * 15
+	TimeoutHwOltSaveConf              = time.Second * 10
+)
 
 type ZxanOltPon struct {
 	Id   int
@@ -61,7 +76,9 @@ type ZxanOltListPonResponse struct {
 }
 
 func (olt *ZxanOlt) ListPon(req *ZxanOltListPonRequest) (resp *ZxanOltListPonResponse, err error) {
-	err = olt.Client.Call(RpcNameZxanOlt+".ListPon", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".ListPon", req, &resp)
 	return
 }
 
@@ -71,7 +88,9 @@ type ZxanOltListOnuResponse struct {
 }
 
 func (olt *ZxanOlt) ListOnu(req *ZxanOltListOnuRequest) (resp *ZxanOltListOnuResponse, err error) {
-	err = olt.Client.Call(RpcNameZxanOlt+".ListOnu", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutZxanOltListOnu)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".ListOnu", req, &resp)
 	return
 }
 
@@ -81,7 +100,9 @@ type ZxanOltListOnuDetailResponse struct {
 }
 
 func (olt *ZxanOlt) ListOnuDetail(req *ZxanOltListOnuDetailRequest) (resp *ZxanOltListOnuDetailResponse, err error) {
-	err = olt.Client.Call(RpcNameZxanOlt+".ListOnuDetail", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutZxanOltListOnuDetail)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".ListOnuDetail", req, &resp)
 	return
 }
 
@@ -98,7 +119,9 @@ type ZxanOltAddOnuRequest struct {
 type ZxanOltAddOnuResponse struct{}
 
 func (olt *ZxanOlt) AddOnu(req *ZxanOltAddOnuRequest) (resp *ZxanOltAddOnuResponse, err error) {
-	err = olt.Client.Call(RpcNameZxanOlt+".AddOnu", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".AddOnu", req, &resp)
 	return
 }
 
@@ -115,7 +138,9 @@ type ZxanOltUpdateOnuRequest struct {
 type ZxanOltUpdateOnuResponse struct{}
 
 func (olt *ZxanOlt) UpdateOnu(req *ZxanOltUpdateOnuRequest) (resp *ZxanOltUpdateOnuResponse, err error) {
-	err = olt.Client.Call(RpcNameZxanOlt+".UpdateOnu", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".UpdateOnu", req, &resp)
 	return
 }
 
@@ -126,7 +151,9 @@ type ZxanOltDeleteOnuRequest struct {
 type ZxanOltDeleteOnuResponse struct{}
 
 func (olt *ZxanOlt) DeleteOnu(req *ZxanOltDeleteOnuRequest) (resp *ZxanOltDeleteOnuResponse, err error) {
-	err = olt.Client.Call(RpcNameZxanOlt+".DeleteOnu", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".DeleteOnu", req, &resp)
 	return
 }
 
@@ -136,7 +163,9 @@ type ZxanOltListOnuUncfgResponse struct {
 }
 
 func (olt *ZxanOlt) ListOnuUncfg(req *ZxanOltListOnuUncfgRequest) (resp *ZxanOltListOnuUncfgResponse, err error) {
-	err = olt.Client.Call(RpcNameZxanOlt+".ListOnuUncfg", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".ListOnuUncfg", req, &resp)
 	return
 }
 
@@ -149,7 +178,9 @@ type ZxanOltListOnuServicePortResponse struct {
 }
 
 func (olt *ZxanOlt) ListOnuServicePort(req *ZxanOltListOnuServicePortRequest) (resp *ZxanOltListOnuServicePortResponse, err error) {
-	err = olt.Client.Call(RpcNameZxanOlt+".ListOnuServicePort", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutZxanOltListOltOnuServicePort)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".ListOnuServicePort", req, &resp)
 	return
 }
 
@@ -157,7 +188,9 @@ type ZxanOltSaveConfigRequest struct{}
 type ZxanOltSaveConfigResponse struct{}
 
 func (olt *ZxanOlt) SaveConfig(req *ZxanOltListOnuServicePortRequest) (resp *ZxanOltListOnuServicePortResponse, err error) {
-	err = olt.Client.Call(RpcNameZxanOlt+".SaveConfig", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutZxanOltSaveConf)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".SaveConfig", req, &resp)
 	return
 }
 
@@ -218,7 +251,9 @@ type HwOltListPonResponse struct {
 }
 
 func (olt *HwOlt) ListPon(req *HwOltListPonRequest) (resp *HwOltListPonResponse, err error) {
-	err = olt.Client.Call(RpcNameHwOlt+".ListPon", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".ListPon", req, &resp)
 	return
 }
 
@@ -228,7 +263,9 @@ type HwOltListOnuResponse struct {
 }
 
 func (olt *HwOlt) ListOnu(req *HwOltListOnuRequest) (resp *HwOltListOnuResponse, err error) {
-	err = olt.Client.Call(RpcNameHwOlt+".ListOnu", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutHwOltListOnu)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".ListOnu", req, &resp)
 	return
 }
 
@@ -238,7 +275,9 @@ type HwOltListOnuDetailResponse struct {
 }
 
 func (olt *HwOlt) ListOnuDetail(req *HwOltListOnuDetailRequest) (resp *HwOltListOnuDetailResponse, err error) {
-	err = olt.Client.Call(RpcNameHwOlt+".ListOnuDetail", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutHwOltListOnuDetail)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".ListOnuDetail", req, &resp)
 	return
 }
 
@@ -253,7 +292,9 @@ type HwOltAddOnuRequest struct {
 type HwOltAddOnuResponse struct{}
 
 func (olt *HwOlt) AddOnu(req *HwOltAddOnuRequest) (resp *HwOltAddOnuResponse, err error) {
-	err = olt.Client.Call(RpcNameHwOlt+".AddOnu", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".AddOnu", req, &resp)
 	return
 }
 
@@ -268,7 +309,9 @@ type HwOltUpdateOnuRequest struct {
 type HwOltUpdateOnuResponse struct{}
 
 func (olt *HwOlt) UpdateOnu(req *HwOltUpdateOnuRequest) (resp *HwOltUpdateOnuResponse, err error) {
-	err = olt.Client.Call(RpcNameHwOlt+".UpdateOnu", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".UpdateOnu", req, &resp)
 	return
 }
 
@@ -279,7 +322,9 @@ type HwOltDeleteOnuRequest struct {
 type HwOltDeleteOnuResponse struct{}
 
 func (olt *HwOlt) DeleteOnu(req *HwOltDeleteOnuRequest) (resp *HwOltDeleteOnuResponse, err error) {
-	err = olt.Client.Call(RpcNameHwOlt+".DeleteOnu", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".DeleteOnu", req, &resp)
 	return
 }
 
@@ -289,7 +334,9 @@ type HwOltListOnuUncfgResponse struct {
 }
 
 func (olt *HwOlt) ListOnuUncfg(req *HwOltListOnuUncfgRequest) (resp *HwOltListOnuUncfgResponse, err error) {
-	err = olt.Client.Call(RpcNameHwOlt+".ListOnuUncfg", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".ListOnuUncfg", req, &resp)
 	return
 }
 
@@ -302,7 +349,9 @@ type HwOltListOnuServicePortResponse struct {
 }
 
 func (olt *HwOlt) ListOnuServicePort(req *HwOltListOnuServicePortRequest) (resp *HwOltListOnuServicePortResponse, err error) {
-	err = olt.Client.Call(RpcNameHwOlt+".ListOnuServicePort", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutHwOltListOltOnuServicePort)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".ListOnuServicePort", req, &resp)
 	return
 }
 
@@ -310,6 +359,8 @@ type HwOltSaveConfigRequest struct{}
 type HwOltSaveConfigResponse struct{}
 
 func (olt *HwOlt) SaveConfig(req *HwOltListOnuServicePortRequest) (resp *HwOltListOnuServicePortResponse, err error) {
-	err = olt.Client.Call(RpcNameHwOlt+".SaveConfig", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutHwOltSaveConf)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".SaveConfig", req, &resp)
 	return
 }

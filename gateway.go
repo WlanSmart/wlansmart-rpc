@@ -1,6 +1,7 @@
 package rpc
 
 import (
+	"context"
 	"errors"
 
 	"github.com/abxuz/b-tools/brpc/http"
@@ -81,6 +82,8 @@ func (g *Gateway) PullConfigSingleflight(req *GatewayPullConfigRequest) (resp *G
 }
 
 func (g *Gateway) PullConfig(req *GatewayPullConfigRequest) (resp *GatewayPullConfigResponse, err error) {
-	err = g.Client.Call(RpcNameGateway+".PullConfig", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = g.Client.CallContext(ctx, RpcNameGateway+".PullConfig", req, &resp)
 	return
 }

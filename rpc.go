@@ -11,6 +11,8 @@ import (
 	rpcHttp "github.com/abxuz/b-tools/brpc/http"
 )
 
+const TimeoutDefault = time.Second * 5
+
 var (
 	httpClient = &http.Client{
 		Transport: &http.Transport{
@@ -27,7 +29,7 @@ var (
 				InsecureSkipVerify: true,
 			},
 		},
-		Timeout: time.Second * 5,
+		Timeout: 0,
 	}
 
 	ErrInternal = errors.New("server internal error")

@@ -1,6 +1,7 @@
 package rpc
 
 import (
+	"context"
 	"time"
 
 	"github.com/abxuz/b-tools/brpc/http"
@@ -38,7 +39,9 @@ type (
 )
 
 func (p *Portal) Bind(req *PortalBindRequest) (resp *PortalBindResponse, err error) {
-	err = p.Client.Call(RpcNamePortal+".Bind", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = p.Client.CallContext(ctx, RpcNamePortal+".Bind", req, &resp)
 	return
 }
 
@@ -55,6 +58,8 @@ type (
 )
 
 func (p *Portal) SendCode(req *PortalSendCodeRequet) (resp *PortalSendCodeResponse, err error) {
-	err = p.Client.Call(RpcNamePortal+".SendCode", req, &resp)
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = p.Client.CallContext(ctx, RpcNamePortal+".SendCode", req, &resp)
 	return
 }
