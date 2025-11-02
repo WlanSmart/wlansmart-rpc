@@ -106,6 +106,21 @@ func (olt *ZxanOlt) ListOnuDetail(req *ZxanOltListOnuDetailRequest) (resp *ZxanO
 	return
 }
 
+type ZxanOltGetOnuDetailRequest struct {
+	PonId int
+	OnuId int
+}
+type ZxanOltGetOnuDetailResponse struct {
+	Data *ZxanOltOnuDetail
+}
+
+func (olt *ZxanOlt) GetOnuDetail(req *ZxanOltGetOnuDetailRequest) (resp *ZxanOltGetOnuDetailResponse, err error) {
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".GetOnuDetail", req, &resp)
+	return
+}
+
 type ZxanOltAddOnuRequest struct {
 	PonId int
 	OnuId int
@@ -278,6 +293,21 @@ func (olt *HwOlt) ListOnuDetail(req *HwOltListOnuDetailRequest) (resp *HwOltList
 	ctx, done := context.WithTimeout(context.Background(), TimeoutHwOltListOnuDetail)
 	defer done()
 	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".ListOnuDetail", req, &resp)
+	return
+}
+
+type HwOltGetOnuDetailRequest struct {
+	PonId int
+	OnuId int
+}
+type HwOltGetOnuDetailResponse struct {
+	Data *HwOltOnuDetail
+}
+
+func (olt *HwOlt) GetOnuDetail(req *HwOltGetOnuDetailRequest) (resp *HwOltGetOnuDetailResponse, err error) {
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".GetOnuDetail", req, &resp)
 	return
 }
 
