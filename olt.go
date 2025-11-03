@@ -66,6 +66,13 @@ type ZxanOltServicePort struct {
 	UserVlan int
 }
 
+func ZxanOltServicePortToVlan(sp ZxanOltServicePort) ZxanOltVlan {
+	if sp.Vlan == 0 {
+		sp.Vlan = sp.UserVlan
+	}
+	return ZxanOltVlan{UserVlan: sp.UserVlan, Vlan: sp.Vlan}
+}
+
 type ZxanOlt struct {
 	Client *http.Client
 }
@@ -159,6 +166,21 @@ func (olt *ZxanOlt) UpdateOnu(req *ZxanOltUpdateOnuRequest) (resp *ZxanOltUpdate
 	return
 }
 
+type ZxanOltUpdateOnuDescRequest struct {
+	PonId int
+	OnuId int
+	Name  string
+	Desc  string
+}
+type ZxanOltUpdateOnuDescResponse struct{}
+
+func (olt *ZxanOlt) UpdateOnuDesc(req *ZxanOltUpdateOnuDescRequest) (resp *ZxanOltUpdateOnuDescResponse, err error) {
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".UpdateOnuDesc", req, &resp)
+	return
+}
+
 type ZxanOltDeleteOnuRequest struct {
 	PonId int
 	OnuId int
@@ -202,7 +224,7 @@ func (olt *ZxanOlt) ListOnuServicePort(req *ZxanOltListOnuServicePortRequest) (r
 type ZxanOltSaveConfigRequest struct{}
 type ZxanOltSaveConfigResponse struct{}
 
-func (olt *ZxanOlt) SaveConfig(req *ZxanOltListOnuServicePortRequest) (resp *ZxanOltListOnuServicePortResponse, err error) {
+func (olt *ZxanOlt) SaveConfig(req *ZxanOltSaveConfigRequest) (resp *ZxanOltSaveConfigResponse, err error) {
 	ctx, done := context.WithTimeout(context.Background(), TimeoutZxanOltSaveConf)
 	defer done()
 	err = olt.Client.CallContext(ctx, RpcNameZxanOlt+".SaveConfig", req, &resp)
@@ -258,6 +280,13 @@ type HwOltServicePort struct {
 	Index    int
 	Vlan     int
 	UserVlan int
+}
+
+func HwOltServicePortToVlan(sp HwOltServicePort) HwOltVlan {
+	if sp.Vlan == 0 {
+		sp.Vlan = sp.UserVlan
+	}
+	return HwOltVlan{UserVlan: sp.UserVlan, Vlan: sp.Vlan}
 }
 
 type HwOltListPonRequest struct{}
@@ -345,6 +374,20 @@ func (olt *HwOlt) UpdateOnu(req *HwOltUpdateOnuRequest) (resp *HwOltUpdateOnuRes
 	return
 }
 
+type HwOltUpdateOnuDescRequest struct {
+	PonId int
+	OnuId int
+	Desc  string
+}
+type HwOltUpdateOnuDescResponse struct{}
+
+func (olt *HwOlt) UpdateOnuDesc(req *HwOltUpdateOnuDescRequest) (resp *HwOltUpdateOnuDescResponse, err error) {
+	ctx, done := context.WithTimeout(context.Background(), TimeoutDefault)
+	defer done()
+	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".UpdateOnuDesc", req, &resp)
+	return
+}
+
 type HwOltDeleteOnuRequest struct {
 	PonId int
 	OnuId int
@@ -388,7 +431,7 @@ func (olt *HwOlt) ListOnuServicePort(req *HwOltListOnuServicePortRequest) (resp 
 type HwOltSaveConfigRequest struct{}
 type HwOltSaveConfigResponse struct{}
 
-func (olt *HwOlt) SaveConfig(req *HwOltListOnuServicePortRequest) (resp *HwOltListOnuServicePortResponse, err error) {
+func (olt *HwOlt) SaveConfig(req *HwOltSaveConfigRequest) (resp *HwOltSaveConfigResponse, err error) {
 	ctx, done := context.WithTimeout(context.Background(), TimeoutHwOltSaveConf)
 	defer done()
 	err = olt.Client.CallContext(ctx, RpcNameHwOlt+".SaveConfig", req, &resp)
