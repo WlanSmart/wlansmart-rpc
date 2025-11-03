@@ -3,7 +3,7 @@ module github.com/WlanSmart/wlansmart-rpc/v2
 go 1.25.3
 
 require (
-	github.com/abxuz/b-tools v0.0.11
+	github.com/abxuz/b-tools/v2 v2.0.2
 	golang.org/x/sync v0.17.0
 )
 

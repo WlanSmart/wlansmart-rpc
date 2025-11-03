@@ -1,5 +1,5 @@
-github.com/abxuz/b-tools v0.0.11 h1:fBUqPkCmo7fNKcGqBdPWhZ65qXbmBVfKOeN9/z7KJw0=
-github.com/abxuz/b-tools v0.0.11/go.mod h1:Cx04rfkOsVQYj2kGKQ35B2yL8DBThVAJMOrrSg8KTSE=
+github.com/abxuz/b-tools/v2 v2.0.2 h1:JySn/J3OCVw2h9G5NPKJ1e+CMr+wL5Ur/YTKtFZ36Js=
+github.com/abxuz/b-tools/v2 v2.0.2/go.mod h1:VBIQtu4YEK15vmZ9I7ggq3drvFZP2TjM7affrAVWNMg=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=

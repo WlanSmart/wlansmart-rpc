@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/abxuz/b-tools/bcrypt"
-	rpcHttp "github.com/abxuz/b-tools/brpc/http"
+	"github.com/abxuz/b-tools/v2/bcrypt"
+	rpcHttp "github.com/abxuz/b-tools/v2/brpc/http"
 )
 
 const TimeoutDefault = time.Second * 5

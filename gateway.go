@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/abxuz/b-tools/brpc/http"
+	"github.com/abxuz/b-tools/v2/brpc/http"
 	"golang.org/x/sync/singleflight"
 )
 

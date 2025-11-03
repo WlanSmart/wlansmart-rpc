@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/abxuz/b-tools/brpc/http"
+	"github.com/abxuz/b-tools/v2/brpc/http"
 )
 
 const RpcNamePortal = "portal"
