@@ -1,6 +1,6 @@
 module github.com/WlanSmart/wlansmart-rpc/v2
 
-go 1.25.3
+go 1.25.4
 
 require (
 	github.com/abxuz/b-tools/v2 v2.0.2

@@ -11,7 +11,9 @@ import (
 	rpcHttp "github.com/abxuz/b-tools/v2/brpc/http"
 )
 
-const TimeoutDefault = time.Second * 5
+type RegisterNameServer interface {
+	RegisterName(name string, rcvr any) error
+}
 
 var (
 	httpClient = &http.Client{
