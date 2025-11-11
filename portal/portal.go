@@ -25,7 +25,6 @@ type BindRequest struct {
 	Password  string
 	ClientIP  string
 	ClientMAC string
-	Hostname  string
 }
 type BindResponse struct {
 	PlanName    string

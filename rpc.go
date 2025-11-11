@@ -16,7 +16,7 @@ type RegisterNameServer interface {
 }
 
 var (
-	httpClient = &http.Client{
+	DefaultHttpClient = &http.Client{
 		Transport: &http.Transport{
 			Proxy: nil,
 			DialContext: (&net.Dialer{
@@ -52,7 +52,7 @@ func NewClient(endpont string, clientPrivateKey string, serverPublicKey string) 
 		rpcHttp.WithClientPrivateKey(cPrivKey),
 		rpcHttp.WithServerPublicKey(sPubKey),
 		rpcHttp.WithEndpoint(endpont),
-		rpcHttp.WithHttpClient(httpClient),
+		rpcHttp.WithHttpClient(DefaultHttpClient),
 	)
 	return c, nil
 }

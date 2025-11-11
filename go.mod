@@ -4,7 +4,8 @@ go 1.25.4
 
 require (
 	github.com/abxuz/b-tools/v2 v2.0.2
-	golang.org/x/sync v0.17.0
+	golang.org/x/sync v0.18.0
+	golang.org/x/text v0.30.0
 )
 
 require (
